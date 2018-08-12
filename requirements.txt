@@ -6,3 +6,4 @@ keras
 scipy
 scikit-learn
 psycopg2
+gunicorn
