@@ -10,7 +10,7 @@ class DB(object):
         self.dataset = None
 
     def establish_connection(self):
-        self.db = psycopg2.connect(host="localhost",
+        self.db = psycopg2.connect(host=config['host'],
                                    user=config['db_username'],
                                    password=config['db_password'],
                                    dbname=config['db_table'])
