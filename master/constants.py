@@ -12,8 +12,12 @@ ALLOWED_EXTENSIONS = {'txt', 'csv'}
 # configs
 
 config = {
-    'environment': 'debug',
+    'environment': 'production',
     'db_postfix': '_category',
+    'db_host': os.environ.get('db_host', ''),
+    'db_username': os.environ.get('db_username', ''),
+    'db_password': os.environ.get('db_password', ''),
+    'db_table': os.environ.get('db_table', '')
 }
 
 if os.path.isfile(os.path.dirname(os.path.realpath(__file__)) + '/../.env'):
