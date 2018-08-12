@@ -1,0 +1,8 @@
+werkzeug
+flask
+pandas
+numpy
+keras
+scipy
+scikit-learn
+psycopg2

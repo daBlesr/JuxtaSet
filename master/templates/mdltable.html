@@ -1,0 +1,19 @@
+<table class="mdl-data-table mdl-js-data-table">
+
+  <thead>
+    <tr>
+         {% for column in data.columns %}
+            <th class="mdl-data-table__cell--non-numeric">{{ column.name }}</th>
+        {% endfor %}
+    </tr>
+  </thead>
+  <tbody>
+    {% for record in data.records %}
+    <tr>
+        {% for column in data.columns %}
+            <td class="mdl-data-table__cell--non-numeric">{{ record[column.name] }}</td>
+        {% endfor %}
+    </tr>
+    {%  endfor %}
+  </tbody>
+</table>

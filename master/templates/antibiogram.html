@@ -1,0 +1,38 @@
+<style>
+  rect.bordered {
+    stroke: #E6E6E6;
+    stroke-width:2px;   
+  }
+
+  text.mono {
+    font-size: 12pt;
+    font-family: Consolas, courier;
+  }
+
+  text.axis-workweek {
+    fill: #000;
+  }
+
+  text.axis-worktime {
+    fill: #000;
+  }
+
+  .questionLabel { font-size: 14px !important; }
+</style>
+
+<div id="chart"></div>
+<div id="dataset-picker">
+</div>
+ <ul>
+  {% for cat in dist %}
+    <li>Percentage of microbes that is <strong> at least </strong> resistant against the following categories: {{ cat[0] }}% <br>
+    Percentage of microbes that is <strong> exactly </strong> resistant against the following categories: {{ cat[2] }}%
+      <ul>
+        {% for category in cat[1] %}
+          <li>{{ category }}</li>
+        {% endfor %}
+      </ul>
+    </li>
+  {% endfor %}
+</ul>
+

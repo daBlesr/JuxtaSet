@@ -1,0 +1,11 @@
+**/*.pyc
+.env
+.env-master
+.env-movies
+.env-sample
+.idea/
+/master/cache/*
+master/cache/
+/datasets/*
+uploads/*
+venv/

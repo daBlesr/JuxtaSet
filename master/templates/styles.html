@@ -1,0 +1,212 @@
+<style id="dynamicStyles">
+
+
+    .purple-cell {
+        fill: #91003F;
+    }
+
+    .purple-stroke {
+        stroke: #91003F;
+    }
+
+    .blue-cell {
+        fill: #0059b3;
+    }
+
+    .cell-border {
+        stroke: #eee;
+        stroke-width: 0.3px;
+    }
+
+    .cell-selected {
+        stroke: rgb(51, 102, 153);
+        stroke-width: 0.5px;
+    }
+
+    .cell-hover {
+        stroke: #F00;
+        stroke-width: 0.3px;
+    }
+
+    .mono {
+        /*fill: #aaa;*/
+        fill: {{ color.status0 }};
+    }
+
+    .tooltip {
+        position: absolute;
+        width: 260px;
+        height: 220px;
+        padding: 20px;
+        background-color: white;
+        z-index: 10;
+    }
+
+    .status0 {
+        fill: {{ color.status0 }};
+    }
+
+    .bar-background {
+        fill: {{ color.barbackground }}
+    }
+
+    .status1 {
+        fill: {{ color.status1 }};
+    }
+
+    .status2 {
+        fill: {{ color.status2 }};
+        stroke: {{ color.status2 }};
+    }
+
+    .barref {
+        fill: {{ color.barref }};
+    }
+
+    .locked {
+        fill: {{ color.locked }};
+    }
+
+    .bar-positive {
+        fill: {{ color.barpositive }};
+    }
+
+    .bar-negative {
+        fill: {{ color.barnegative }};
+    }
+
+    .hovered {
+        fill: {{ color.hover }};
+    }
+
+    line.hovered {
+        stroke: {{ color.hover }};
+    }
+
+    .hovered-stroke{
+        stroke: {{ color.hover }};
+    }
+
+    text.bartextleft {
+        fill: {{ color.bartextleft }};
+    }
+
+    text.bartextright {
+        fill: {{ color.bartextright }};
+    }
+
+    .sort {
+        fill: {{ color.sort }};
+    }
+
+    .whitefill {
+        fill: white;
+    }
+
+    .seethrough {
+        fill: rgba(255,255,255,0);
+    }
+
+    .stroke-status0 {
+        stroke: {{ color.status0 }};
+    }
+
+    .stroke-status2 {
+        stroke: {{ color.status2 }};
+    }
+
+    .stroke-locked {
+        stroke: {{ color.locked }};
+    }
+
+    .imputed1 {
+        fill: {{ color.imputed1 }};
+    }
+
+    .imputed2 {
+        fill: {{ color.imputed2 }};
+    }
+
+    .hovered.status2 {
+        fill: {{ color.hoverstatus2 }};
+    }
+
+    .hovered.stroke-status2 {
+        stroke: {{ color.hoverstatus2 }};
+    }
+
+    .highlighter-on-background {
+        fill: rgba(255, 255, 255, 0);
+        stroke: rgba(255, 255, 255, 0);
+    }
+
+    .verticalbar {
+        /**stroke: black;*/
+        fill: {{ color.verticalbar }};
+    }
+
+    text.hovered {
+        fill: black;
+        font-weight: bold;
+    }
+
+    .jscolor {
+        width: 100px;
+        float: right
+    }
+
+    .non-strike-button {
+        fill: {{ color.status2 }};
+        /** transition:  300ms;*/
+    }
+
+    .strike-button {
+        fill: {{ color.locked }};
+    }
+
+    .status2.imputed{
+        fill: {{ color.imputed }};
+    }
+    .stroke-status2.imputed{
+        stroke: {{ color.imputed }};
+    }
+
+    .swimLanes-hor, .swimLanes-ver{
+        /**stroke: black;*/
+        fill: {{ color.verticalbar }};
+    }
+
+    .icon-status0{
+        color: {{ color.status0 }};
+        cursor:pointer;
+    }
+
+    .icon-status0:hover {
+        color: {{ color.hover }};
+    }
+
+    .icon-locked{
+        color: {{ color.locked }};
+    }
+
+
+    .filter-top-node{
+        float:left;
+        background-color: {{color.barbackground}};
+        margin-right: 3px;
+        padding: 4px;
+
+        margin-bottom: 2px;
+        height: 22px;
+    }
+
+    .status0-with-hover{
+        fill: {{ color.status0 }};
+        cursor:pointer;
+    }
+
+    .status0-with-hover:hover{
+        fill: {{ color.hover }};
+    }
+
+</style>

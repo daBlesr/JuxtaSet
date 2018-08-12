@@ -1,0 +1,369 @@
+
+
+<div id="toolbox" style="float:left; width:500px; height:1700px; ">
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#scroll-tab-0" class="mdl-layout__tab is-active">Colors</a>
+                <a href="#scroll-tab-1" class="mdl-layout__tab">Data Filter</a>
+                <a href="#scroll-tab-2" class="mdl-layout__tab">Resistance Patterns</a>
+                <a href="#scroll-tab-3" class="mdl-layout__tab">Data Mining</a>
+                <a href="#scroll-tab-5" class="mdl-layout__tab">Cartography</a>
+            </div>
+        </header>
+        <main class="mdl-layout__content">
+
+            <section class="mdl-layout__tab-panel mdl-grid is-active" id="scroll-tab-0">
+                <div class="page-content mdl-grid center-vertical">
+                    Aanpassen van kleuren
+                    <div style="display: inline-block">
+                        {% for c in colors %}
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="color-selection-{{ c.name }}">
+                            <input type="radio" id="color-selection-{{ c.name }}" class="mdl-radio__button" value="{{ c.name }}" name="color-selection"
+                                   {% if c.name == color.name %}
+                                    checked
+                                    {% endif %}
+                                   onchange="getURL().setSearch('color','{{c.name}}').go();">
+                            <span class="mdl-radio__label">{{ c.name }}</span>
+                        </label>
+                            <br>
+                        {% endfor %}
+                        <hr>
+                        <form action="add-pallette" method="POST">
+                            <div>
+                            <span style="margin-right: 10px;">Name</span>
+                            <input name="color-name" style="float:right">
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">hover</span>
+                            <input name="color-hover" class="jscolor" value="{{ color.hover }}"
+                                   onchange="changeCSSRule([
+                                       '.hovered {fill:#'+ this.value+';}',
+                                       'line.hovered { stroke:#'+ this.value+';}'
+                                   ])">
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">lock</span>
+                            <input name="color-locked" class="jscolor" value="{{ color.locked }}"
+                                onchange="changeCSSRule([
+                                       '.locked {fill:#'+ this.value+';}',
+                                       'stroke.locked { stroke:#'+ this.value+';}'
+                                   ])"
+                            >
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">status 0</span>
+                            <input name="color-status0" class="jscolor" value="{{ color.status0 }}"
+                            onchange="changeCSSRule([
+                                       '.status0 {fill:#'+ this.value+';}',
+                                       '.stroke-status0 { stroke:#'+ this.value+';}'
+                                   ])">
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">status 1</span><input class="jscolor" value="{{ color.status1 }}" name="color-status1"
+                            onchange="changeCSSRule(['.status1 {fill:#'+ this.value+';}'])"
+                        >
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">imputed</span>
+                            <input class="jscolor" value="{{ color.status2 }}" name="color-status2"
+                            onchange="changeCSSRule([
+                                       '.status2 {fill:#'+ this.value+'; stroke:#'+ this.value+';}',
+                                       '.stroke-status2 { stroke:#'+ this.value+';}'
+                                   ])">
+                        </div><br>
+                        <div>
+                            <span style="margin-right: 10px;">sorted</span><input class="jscolor" value="{{ color.sort }}" name="color-sort"
+                            onchange="changeCSSRule([
+                                       '.sort {fill:#'+ this.value+';}'
+                                   ])"
+                        >
+                        </div><br>
+                        <div><span style="margin-right: 10px;">positive bar</span>
+                            <input class="jscolor" value="{{ color.barpositive }}" name="color-barpositive"
+                            onchange="changeCSSRule([
+                                       '.bar-positive {fill:#'+ this.value+';}',
+                                   ])"
+                            >
+                        </div><br>
+                        <div><span style="margin-right: 10px;">negative bar</span>
+                            <input class="jscolor" value="{{ color.barnegative }}" name="color-barnegative"
+                            onchange="changeCSSRule([
+                                       '.bar-negative {fill:#'+ this.value+';}',
+                                   ])">
+                        </div><br>
+                        <div><span style="margin-right: 10px;">imputed circle color status 0</span><input class="jscolor" value="{{ color.imputed2 }}" name="color-imputed2"
+                        onchange="changeCSSRule([
+                                       '.imputed2 {fill:#'+ this.value+';}',
+                                   ])">
+                        </div><br>
+                        <div><span style="margin-right: 10px;">imputed circle color status 1</span><input class="jscolor" value="{{ color.imputed1 }}" name="color-imputed1"
+                        onchange="changeCSSRule([
+                                       '.imputed1 {fill:#'+ this.value+';}',
+                                   ])"></div><br>
+                        <div><span style="margin-right: 10px;">reference values bar chart</span><input class="jscolor" value="{{ color.barref }}" name="color-barref"
+                            onchange="changeCSSRule([
+                                       '.barref {fill:#'+ this.value+';}',
+                                   ])"
+                        ></div><br>
+                        <div><span style="margin-right: 10px;">background bar color</span><input class="jscolor" value="{{ color.barbackground }}" name="color-barbackground"
+                        onchange="changeCSSRule([
+                                       '.bar-background {fill:#'+ this.value+';}',
+                                       '.stroke-barbackground { stroke:#'+ this.value+';}'
+                                   ])"></div><br>
+                        <div><span style="margin-right: 10px;">color text on status 0</span><input class="jscolor" value="{{ color.bartextleft }}" name="color-bartextleft"
+                        onchange="changeCSSRule([
+                                       'text.bartextleft {fill:#'+ this.value+';}',
+                                   ])"></div><br>
+                        <div><span style="margin-right: 10px;">color text on background bar color</span><input class="jscolor" value="{{ color.bartextright }}" name="color-bartextright"
+                        onchange="changeCSSRule([
+                                       'text.bartextright {fill:#'+ this.value+';}',
+                                   ])"></div><br>
+                        <div><span style="margin-right: 10px;">imputed hovered</span><input class="jscolor" value="{{ color.hoverstatus2 }}" name="color-hoverstatus2"
+                        onchange="changeCSSRule([
+                                       '.hovered.status2 {fill:#'+ this.value+';}',
+                                       '.hovered.stroke-status2 { stroke:#'+ this.value+';}'
+                                   ])"></div><br>
+                            <div><span style="margin-right: 10px;">vertical bar color</span><input class="jscolor" value="{{ color.verticalbar }}" name="color-verticalbar"
+                        onchange="changeCSSRule([
+                                       '.verticalbar {fill:#'+ this.value+';}',
+                                   ])"></div><br>
+                        <button type="button" onclick="addPallette(this);">add pallette</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mdl-layout__tab-panel " id="scroll-tab-1">
+                <div class="page-content mdl-grid center-vertical">
+
+
+                    <br>
+                    <span style="padding-bottom: 10px">Show only the following categories in the visualizations:</span>
+                    <div style="float:left">
+                        {% for category in categories %}
+                            <span class="mdl-chip mdl-chip--deletable" style="background:forestgreen">
+                            <span class="mdl-chip__text category-chip" >{{ category.category }}</span>
+
+                            <button id="category-chip-filtered-{{ category.category }}" type="button" class="mdl-chip__action"
+                                    onclick="filtercategory(this, '{{ category.category }}', true)"
+                                    >
+                                    <i class="material-icons" >
+                                        {% if not items_filtered or category.category not in items_filtered %}
+                                        cancel
+
+                                        {%  else %}
+                                        add_circle
+                                        {% endif %}
+                                    </i>
+
+                            </button>
+                        </span>
+                        {%  endfor %}
+                    </div>
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel mdl-grid" id="scroll-tab-2">
+                <div class="page-content mdl-grid center-vertical">
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="resistance-pattern-exact">
+                        <input type="radio" id="resistance-pattern-exact" class="mdl-radio__button" value="resistance-pattern-exact" name="resistance-pattern-method"
+                                checked
+                               onchange="extractSettingsAndSendRequest()">
+                        <span class="mdl-radio__label">Exact resistance patterns</span>
+                    </label><br>
+                    <div style="margin-left: 20px;">
+                        <span style="padding-bottom: 10px;">Maximum number of elements per subset:</span><br>
+                        {% for x in [1,2,3,4,5,6,7,8] %}
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="nesting-level-{{ loop.index }}">
+                                <input type="radio" id="nesting-level-{{ loop.index }}" class="mdl-radio__button" value="{{x}}" name="nesting-level"
+                                        {% if x == 6 %} checked
+                                        {%  endif %}
+                                       onchange="extractSettingsAndSendRequest()">
+                                <span class="mdl-radio__label">{{ x }}</span>
+                            </label><br>
+                        {% endfor %}
+                        <br>
+                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="flipped-nested-view">
+                            <input type="checkbox" id="flipped-nested-view" class="mdl-switch__input"
+                                   onchange="extractSettingsAndSendRequest();">
+                            <span class="mdl-switch__label">Flip resistances to effectiveness of treatment</span>
+                        </label><br>
+                    </div><br>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="resistance-pattern-panels">
+                        <input type="radio" id="resistance-pattern-panels" class="mdl-radio__button" value="resistance-pattern-panels" name="resistance-pattern-method"
+                               onchange="extractSettingsAndSendRequest()">
+                        <span class="mdl-radio__label">Resistance patterns panels</span>
+                    </label><br>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="resistance-pattern-mining">
+                        <input type="radio" id="resistance-pattern-mining" class="mdl-radio__button" value="resistance-pattern-mining" name="resistance-pattern-method"
+                               onchange="extractSettingsAndSendRequest()">
+                        <span class="mdl-radio__label">Data mining on resistance patterns</span>
+                    </label><br>
+                    <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="cartographic-chart">
+                        <input type="radio"  id="cartographic-chart" class="mdl-radio__button" value="cartographic-chart" name="resistance-pattern-method"
+                               onchange="extractSettingsAndSendRequest()">
+                        <span class="mdl-radio__label">Cartographic hart</span>
+                    </label><br>
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="absolute_or_relative">
+                        <input type="checkbox" id="absolute_or_relative" class="mdl-switch__input" checked
+                               onchange="fireEvents('switch-relative-absolute-labels', {'state': this.checked});">
+                        <span class="mdl-switch__label">Absolute or relative values on column header</span>
+                    </label><br>
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="categories_or_classifications">
+                        <input type="checkbox" id="categories_or_classifications" class="mdl-switch__input"
+                               {% if classifications %}
+                                    checked
+                                {%  endif %}
+                               onchange="if(this.checked){location.href = '{{ request.url_root }}classifications';} else{location.href = '{{ request.url_root }}';};">
+                        <span class="mdl-switch__label">Distinct categories or grouped classifications</span>
+                    </label><br>
+                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="medicin-box-display">
+                        <input type="checkbox" id="medicin-box-display" class="mdl-switch__input" checked
+                               onchange="extractSettingsAndSendRequest()">
+                        <span class="mdl-switch__label">Display Medicine Toolbox</span>
+                    </label><br>
+                    <span style="padding-bottom: 10px">Sort:</span>
+                    <select id="order">
+                        <option value="default">Default</option>
+                        <option value="ARM-Lexico-RHS">Lexicographical ordering on ARM by RHS</option>
+                        <option value="ARM-Lexico-LHS">Lexicographical ordering on ARM by LHS</option>
+                        <option value="by Resistances">Ordering on total resistance count</option>
+                    </select>
+                    <br><br>
+
+                </div>
+            </section>
+            <section class="mdl-layout__tab-panel mdl-grid" id="scroll-tab-3">
+                <div class="page-content mdl-grid center-vertical">
+                    <div id="data_mining" style="margin-left:20px">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="association_rule_mining">
+                            <input type="radio" id="association_rule_mining" class="mdl-radio__button" name="data-mining-options" value="arm" checked onchange="extractSettingsAndSendRequest()">
+                            <span class="mdl-radio__label"><a href="https://en.wikipedia.org/wiki/Association_rule_learning" target="_blank">Association Rule Learning </a></span>
+                        </label><br><br>
+                        <div style="margin-left: 30px;">
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text" value="0.15" pattern="-?[0-9]*(\.[0-9]+)?" id="support" onchange="extractSettingsAndSendRequest()">
+                                <label class="mdl-textfield__label" for="support">Minimum support</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                <input class="mdl-textfield__input" type="text"  value="0.6" pattern="-?[0-9]*(\.[0-9]+)?" id="confidence" onchange="extractSettingsAndSendRequest()">
+                                <label class="mdl-textfield__label" for="support">Minimum confidence</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <br>
+                        </div>
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="clustering_pca">
+                            <input type="radio" id="clustering_pca" class="mdl-radio__button" value="clustering" name="data-mining-options" onchange="extractSettingsAndSendRequest()">
+                            <span class="mdl-radio__label">
+                                  <a href="https://en.wikipedia.org/wiki/Cluster_analysis" target="_blank">Clustering</a> and
+                                  <a href="https://en.wikipedia.org/wiki/Principal_component_analysis" target="_blank">PCA</a></span>
+                        </label>
+                        <br><br>
+                        <div style="margin-left: 30px" id="clustering">
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="k-means">
+                                <input type="radio" id="k-means" class="mdl-radio__button" value="k-means" name="clustering-method" checked onchange="extractSettingsAndSendRequest()">
+                                <span class="mdl-radio__label">
+                                      <a href="https://en.wikipedia.org/wiki/K-means_clustering" target="_blank">K-Means</a></span>
+                            </label><br>
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label" style="margin-left: 20px;">
+                                <input class="mdl-textfield__input" type="text"  value="10" pattern="-?[0-9]*(\.[0-9]+)?" id="number_of_clusters" onchange="extractSettingsAndSendRequest()">
+                                <label class="mdl-textfield__label" for="support">Number of clusters</label>
+                                <span class="mdl-textfield__error">Input is not a number!</span>
+                            </div>
+                            <label style="margin-left: 20px;" class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="cluster-trend-analysis">
+                                <input type="checkbox" id="cluster-trend-analysis" class="mdl-switch__input"  onchange="extractSettingsAndSendRequest()">
+                                <span class="mdl-switch__label">Trend analysis</span>
+                            </label><br>
+                            <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="DBSCAN">
+                                <input type="radio" id="DBSCAN" class="mdl-radio__button" value="DBSCAN" name="clustering-method" onchange="extractSettingsAndSendRequest()">
+                                <span class="mdl-radio__label">
+                                      <a href="https://en.wikipedia.org/wiki/DBSCAN" target="_blank">DBSCAN</a></span>
+                            </label>
+                            <div style="margin-left: 20px">
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text"  value="0.08" pattern="-?[0-9]*(\.[0-9]+)?" id="dbscan_epsilon" onchange="extractSettingsAndSendRequest()">
+                                    <label class="mdl-textfield__label" for="support">Epsilon</label>
+                                    <span class="mdl-textfield__error">Input is not a number!</span>
+                                </div>
+                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+                                    <input class="mdl-textfield__input" type="text"  value="5" pattern="-?[0-9]*(\.[0-9]+)?" id="dbscan_min_samples" onchange="extractSettingsAndSendRequest()">
+                                    <label class="mdl-textfield__label" for="support">Minimum number of samples</label>
+                                    <span class="mdl-textfield__error">Input is not a number!</span>
+                                </div>
+                                <label  class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="outlier-analysis">
+                                    <input type="checkbox" id="outlier-analysis" class="mdl-switch__input"  onchange="extractSettingsAndSendRequest()">
+                                    <span class="mdl-switch__label">Outlier Analysis</span>
+                                </label><br>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+
+
+                </div>
+            </section>
+
+            <section class="mdl-layout__tab-panel mdl-grid" id="scroll-tab-5">
+                <div class="page-content mdl-grid center-vertical">
+                    Options to modify the cartography view
+                    <label  class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="cartographic-absolute-or-relative">
+                        <input type="checkbox" id="cartographic-absolute-or-relative" class="mdl-switch__input"
+                               onchange="fireEvents('cartographic-absolute-or-relative',{value: this.checked})">
+                        <span class="mdl-switch__label">Cartographic absolute</span>
+                    </label><br>
+                    <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent"
+                            type="buttion" onclick="fireEvents('export-to-image',{})"
+                            style="width: 200px; margin:auto;"
+                    >
+                      Save to image
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+</div>
+<script>
+    {%  if cache_id and cluster %}
+        var cache_id = {{ cache_id }};
+        var cluster_id = {{ cluster }};
+    {% else %}
+        var cache_id = null;
+        var cluster_id = null;
+    {% endif %}
+
+    var items_filtered = [];
+
+    {% for category in categories %}
+        {% if items_filtered and category.category in items_filtered %}
+            filtercategory(document.getElementById('category-chip-filtered-{{ category.category }}'), '{{ category.category }}', false);
+        {% endif %}
+    {% endfor %}
+
+    var defaultStatistics = null;
+
+    window.addEventListener('DOMContentLoaded', function () {
+        extractSettingsAndSendRequest();
+
+        /**
+        function hoverEffect(t){
+            var i = t.target.querySelector('input[type="radio"]');
+            //console.log(i);
+            if(i){
+
+                i.click();
+            }
+            //t.target.checked =true;
+        }
+
+        var radios = document.getElementsByClassName('mdl-js-radio');
+        for(var i = 0; i < radios.length; i++){
+            var x = radios[i];
+            x.addEventListener('mouseover', hoverEffect);
+        }
+        */
+    });
+</script>

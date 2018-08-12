@@ -1,0 +1,38 @@
+<div id="chart" style='overflow:auto;'></div>
+<div id="chart2" style='overflow:auto;'></div>
+<div id="chart3" style='overflow:auto;'></div>
+<div id="tooltip" class="demo-card-square mdl-card mdl-shadow--2dp hidden tooltip" style="display:none;">
+    <div class="mdl-card__title">
+        <h2 class="mdl-card__title-text">Info</h2>
+    </div>
+    <div class="mdl-card__supporting-text" style="overflow-y:auto">
+        <span id="value"></span>
+        <svg id="tooltipsvg" class="hidden"></svg>
+    </div>
+    <div class="mdl-card__actions mdl-card--border">
+        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="window-open-link" onclick="">
+            View Cartograph
+        </a>
+    </div>
+     <div class="mdl-card__menu">
+        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect" onclick="hideTooltip();">
+          <i class="material-icons" style="color:rgb(63,81,181)" >highlight_off</i>
+        </button>
+      </div>
+</div>
+<!--<div id="tooltip" class="hidden tooltip mdl-card "></div>-->
+<div id="huge-tooltip" class="hidden tooltip" style="width: 600px; height: auto; float:left;">
+
+</div>
+<button id="expand-button" type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored hidden" style="width: 200px; margin-left:auto; margin-right:auto">
+    Expand
+</button>
+<script>
+    d3.select("#huge-tooltip").on('mouseover',function(d){d3.select(this).classed("hidden", false);});
+    var url = getURL();
+    var base_url = "{{ request.url_root }}" + url.directory().replace("/","") + "/";
+    function hideTooltip(){
+        //d3.select('#tooltip').classed('hidden', true);
+        document.getElementById('tooltip').style.display = 'none';
+    }
+</script>

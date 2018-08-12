@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Visualization</title>
+    <script src="{{ url_for('static', filename='d3.v3.js') }}"></script>
+    <script src="{{ url_for('static', filename='d3-queue.v3.min.js') }}"></script>
+    <script  type="text/javascript" src="{{ url_for('static', filename='all.js') }}"></script>
+    <script  type="text/javascript" src="{{ url_for('static', filename='PatternMatrix.js') }}?version={{range(1, 200) | random}}"></script>
+    <script  type="text/javascript" src="{{ url_for('static', filename='barchart.js') }}?version={{range(1, 200) | random}}"></script>
+    <link rel="shortcut icon" href="http://www.rivm.nl/favicon.ico" />
+</head>
+<body>
+    <div id="content">
+    {% block content %}
+
+    {% endblock %}
+    </div>
+</body>
+</html>

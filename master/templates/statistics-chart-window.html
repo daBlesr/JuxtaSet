@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% include 'include-scripts-links.html' %}
+</head>
+<body>
+<div class="demo-layout mdl-layout mdl-js-layout mdl-layout--fixed-header">
+    {% include 'header.html' %}
+
+    <main class="mdl-layout__content mdl-color--grey-100">
+        <div class="mdl-grid" >
+            <div style="padding:20px;" class="mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+                <h1>Statistics of Specific Resistance Pattern</h1>
+                <p>Numbers in charts are shown with respect to the complete database and hence the numbers are scaled.</p>
+                {% include 'visualization.html' %}
+                <script>
+                    var stats = JSON.parse({{data|tojson|safe}});
+                    var defaultStatistics = JSON.parse({{default_statistics|tojson|safe}});
+                    showStatistics(stats, document.getElementById('chart'), true);
+                </script>
+            </div>
+        </div>
+
+    </main>
+</div>
+
+</body>
+</html>

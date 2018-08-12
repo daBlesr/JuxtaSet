@@ -1,0 +1,15 @@
+{
+  "Age_attr":{
+    "visualize":true,
+    "numerical":true,
+    "bins":"5"
+  },
+  "Year_temp":{
+    "temporal":true
+  },
+  "Year_attr":{
+    "visualize":true,
+    "numerical":false
+  },
+  "title":"sample"
+}

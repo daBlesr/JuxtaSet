@@ -1,0 +1,11 @@
+{
+  "book_attr": {
+    "visualize":true,
+    "numerical":true,
+    "bins":"5"
+  },
+  "play_temp": {
+    "temporal":true
+  },
+  "title":"Les Miserables"
+}

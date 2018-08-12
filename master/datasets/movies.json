@@ -1,0 +1,25 @@
+{
+  "title": "Movies - db",
+  "name_attr": {
+    "visualize": false,
+    "numerical": false
+  },
+  "rating_attr": {
+    "visualize": true,
+    "numerical": true,
+    "bins": 6
+  },
+  "watched_attr": {
+    "visualize": true,
+    "numerical": true,
+    "bins": 30
+  },
+  "year_attr": {
+    "visualize": true,
+    "numerical": true,
+    "bins": 50
+  },
+  "year_temp": {
+    "temporal": true
+  }
+}
